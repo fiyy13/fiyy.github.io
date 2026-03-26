@@ -526,7 +526,7 @@ footer { padding: 36px 48px; border-top: 1px solid var(--bdr); display: flex; al
     <div class="mp-bar"></div>
     <div class="mp-bar"></div>
   </div>
-  <div class="mp-info"><b id="mp-title">No music loaded</b></div>
+  <div class="mp-info"><b id="mp-title">Click to play music</b></div>
   <div class="mp-vol" onclick="event.stopPropagation()">
     <span class="mp-vol-icon">🔈</span>
     <input type="range" class="mp-slider" id="mp-vol" min="0" max="1" step="0.01" value="0.35">
@@ -649,8 +649,10 @@ const CONFIG = {
   name: "FIYY",
   tagline: `<span class="ac">Roblox Dev</span> &mdash; Web Builder &mdash; <span class="ac">Commission Open</span>`,
   isAvailable: false,
-  bgVideo: "bg.mp4",
-  music: [{ file: "music.mp3", title: "Lost Soul — NBSPLV" }],
+  // IMPORTANT: Update these paths to match your actual file locations
+  // Example: If files are in a 'media' folder, use: "media/bg.mp4"
+  bgVideo: "bg.mp4",  // ⚠️ UPDATE THIS PATH
+  music: [{ file: "music.mp3", title: "Lost Soul — NBSPLV" }],  // ⚠️ UPDATE THIS PATH
   portfolio: {
     building: [
       { title: "MCOnet Project", description: "A map based on Monaco", image: "portfolio/building/monaco.webp" },
@@ -736,16 +738,50 @@ function initVideo() {
   const v = document.getElementById('bg-vid');
   if (CONFIG.bgVideo) {
     v.src = CONFIG.bgVideo;
-    v.muted = true; // Required for autoplay
-    v.play().catch(err => console.error("Video Autoplay Blocked:", err));
+    v.muted = true;
+    v.load();
+    
+    // Try to play video
+    v.play().catch(err => {
+      console.warn("⚠️ Background video could not load:", err);
+      console.warn("Please check that '" + CONFIG.bgVideo + "' exists in the same directory as index.html");
+      // Show fallback gradient background
+      document.getElementById('vbg-fallback').style.opacity = '1';
+    });
+    
+    // Handle video load errors
+    v.addEventListener('error', (e) => {
+      console.error("❌ Video Error: File not found or cannot load:", CONFIG.bgVideo);
+      console.error("Make sure 'bg.mp4' is in the correct location!");
+      document.getElementById('vbg-fallback').style.opacity = '1';
+    });
+    
+    // Log when video loads successfully
+    v.addEventListener('loadeddata', () => {
+      console.log("✅ Background video loaded successfully!");
+    });
   }
 }
 
 function initMusic() {
   if (!CONFIG.music.length) return;
+  
   loadTrack(0);
   volEl.addEventListener('input', () => audio.volume = volEl.value);
   audio.volume = 0.35;
+  
+  // Handle audio errors
+  audio.addEventListener('error', (e) => {
+    console.error("❌ Audio Error: Cannot load music file:", CONFIG.music[trackIdx].file);
+    console.error("Make sure 'music.mp3' is in the correct location!");
+    document.getElementById('mp-title').textContent = "Music file not found";
+  });
+  
+  // Log when audio loads successfully
+  audio.addEventListener('loadeddata', () => {
+    console.log("✅ Music loaded successfully!");
+  });
+  
   audio.addEventListener('ended', () => {
     trackIdx = (trackIdx + 1) % CONFIG.music.length;
     loadTrack(trackIdx);
@@ -756,7 +792,7 @@ function initMusic() {
 function loadTrack(i) {
   const t = CONFIG.music[i];
   audio.src = t.file;
-  document.getElementById('mp-title').textContent = t.title;
+  document.getElementById('mp-title').textContent = "Click to play music";
 }
 
 function toggleMusic() {
@@ -764,16 +800,23 @@ function toggleMusic() {
   if (isPlaying) {
     audio.pause();
     bars.classList.add('paused');
+    isPlaying = false;
+    console.log("⏸️ Music paused");
   } else {
     // Attempting play
     audio.play().then(() => {
       bars.classList.remove('paused');
+      isPlaying = true;
+      document.getElementById('mp-title').textContent = CONFIG.music[trackIdx].title;
+      console.log("▶️ Music playing:", CONFIG.music[trackIdx].title);
     }).catch(err => {
-      console.error("Audio blocked by browser. Click anywhere first.", err);
-      copyToast("Interaction Required", "Click anywhere first!");
+      console.error("❌ Cannot play audio:", err);
+      console.error("Possible reasons:");
+      console.error("1. Music file '" + CONFIG.music[trackIdx].file + "' not found");
+      console.error("2. Browser blocked autoplay (this is normal - user must click first)");
+      copyToast("Music file not found or blocked", "Check console for details");
     });
   }
-  isPlaying = !isPlaying;
 }
 
 function initCursor() {
@@ -864,6 +907,13 @@ function copyToast(text, msg) {
   t.textContent = msg || 'Copied!'; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2200);
 }
+
+// On page load, check media files
+console.log("🔍 Checking media files...");
+console.log("Expected video file: " + CONFIG.bgVideo);
+console.log("Expected audio file: " + CONFIG.music[0].file);
+console.log("📂 These files should be in the same directory as your index.html");
+console.log("💡 Open browser DevTools (F12) to see any errors");
 </script>
 </body>
 </html>
