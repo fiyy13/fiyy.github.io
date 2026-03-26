@@ -747,58 +747,32 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isPlaying) audio.play().catch(() => {});
   });
 });
-// Better audio initialization
-audio.addEventListener('play', () => {
-  isPlaying = true;
-  document.getElementById('mp-bars').classList.remove('paused');
-});
 
-audio.addEventListener('pause', () => {
-  isPlaying = false;
-  document.getElementById('mp-bars').classList.add('paused');
-});
 // THIS RUNS WHEN "CLICK TO ENTER" IS CLICKED
 function startSite() {
-  // 1. Hide enter screen
-  const enterScreen = document.getElementById('enter-screen');
-  enterScreen.classList.add('gone');
-
-  // 2. Start video background
+  // 1. Hide the enter screen
+  document.getElementById('enter-screen').classList.add('gone');
+  
+  // 2. Play Video (Browsers allow it because of the click)
   const v = document.getElementById('bg-vid');
   if (CONFIG.bgVideo) {
     v.src = CONFIG.bgVideo;
-    v.play().catch(e => console.log("Video play failed:", e));
+    v.play().catch(e => console.log("Video start error:", e));
   }
-
-  // 3. IMPROVED MUSIC START
-  if (CONFIG.music.length > 0) {
-    const audio = document.getElementById('bg-audio');
-    
-    // Make sure source is set
+  
+  // 3. Play Music (Browsers allow it because of the click)
+  if (CONFIG.music.length) {
     audio.src = CONFIG.music[0].file;
-    audio.volume = document.getElementById('mp-vol').value || 0.35;
-    
-    // Small delay + direct play attempt (helps with some browsers)
-    setTimeout(() => {
-      audio.play()
-        .then(() => {
-          isPlaying = true;
-          document.getElementById('mp-bars').classList.remove('paused');
-          document.getElementById('mp-title').textContent = CONFIG.music[0].title;
-          console.log("✅ Music started successfully");
-        })
-        .catch(err => {
-          console.log("❌ Music play failed:", err);
-          // Optional: show a toast asking user to click music player
-          // copyToast("", "Click the music player to start");
-        });
-    }, 100); // tiny delay often helps
+    audio.volume = volEl.value || 0.35;
+    audio.play().then(() => {
+      isPlaying = true;
+      document.getElementById('mp-bars').classList.remove('paused');
+      document.getElementById('mp-title').textContent = CONFIG.music[0].title;
+    }).catch(e => console.log("Audio play error:", e));
   }
 
-  // 4. Hide loader after a moment
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('gone');
-  }, 1600);
+  // 4. Start the original loader sequence
+  setTimeout(() => document.getElementById('loader').classList.add('gone'), 1600);
 }
 
 function toggleMusic() {
