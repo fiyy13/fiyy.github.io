@@ -753,7 +753,7 @@ footer {
 </div><!-- end .wrap -->
 
 <!-- ════════════════════════════════════════════════════════
-     ✏️  CONFIG — EDIT THIS SECTION TO CUSTOMIZE EVERYTHING
+     ✏️  CONFIG 
 ════════════════════════════════════════════════════════ -->
 <script>
 const CONFIG = {
@@ -768,22 +768,10 @@ const CONFIG = {
 
   /* ───────────────────────────────────────────────
      BACKGROUND VIDEO
-     ─────────────────────────────────────────────
-     1. Drop a .mp4 file in the SAME folder as index.html
-     2. Change "bg.mp4" below to your filename
-     Leave empty ("") to use the animated gradient instead
   ─────────────────────────────────────────────── */
   bgVideo: "bg.mp4",
-
-
   /* ───────────────────────────────────────────────
      MUSIC
-     ─────────────────────────────────────────────
-     1. Drop your .mp3 file in the SAME folder as index.html
-     2. Edit the list below. You can add multiple songs!
-
-     Example:
-       { file: "mysong.mp3", title: "Song Name — Artist" },
   ─────────────────────────────────────────────── */
   music: [
     { file: "music.mp3", title: "Lost Soul — NBSPLV" },
@@ -793,17 +781,6 @@ const CONFIG = {
 
   /* ───────────────────────────────────────────────
      PORTFOLIO
-     ─────────────────────────────────────────────
-     Add your work images under each category.
-     
-     HOW TO ADD AN IMAGE:
-     1. Create a folder called "portfolio" next to index.html
-     2. Inside it, create folders: building / scripting / website / graphic
-     3. Drop your images there
-     4. Add a line like this:
-          { title: "Project Name", description: "Short description", image: "portfolio/building/myimage.png" }
-     
-     You can add as many as you want!
   ─────────────────────────────────────────────── */
   portfolio: {
     building: [
@@ -817,16 +794,24 @@ const CONFIG = {
        { title: "National Council",      description: "A 1:1 Replica of the Monaco National Council",             image: "portfolio/building/nc.webp" },
     ],
     scripting: [
-      // { title: "Placement System",  description: "Grid-based building system",        image: "portfolio/scripting/placement.png" },
-      // { title: "Admin System",      description: "Full moderation toolset",            image: "portfolio/scripting/admin.png" },
+       { title: "Car Dealership",  description: "Advanced Car dealership V1",        image: "portfolio/scripting/dealer.webp" },
+       { title: "Radio System",  description: "Radio with animation, callsign, etc.",        image: "portfolio/scripting/radio.webp" },
+       { title: "Bank Robbery",  description: "Two-method robbery (Bomb & Drill) with timer GUI",        image: "portfolio/scripting/br.webp" },
+       { title: "Citation System",  description: "Advanced & realistic citation system",        image: "portfolio/scripting/cit.webp" },
+       { title: "Side Menu",  description: "Simple side menu with equipments changer",        image: "portfolio/scripting/menu.webp" },
+       { title: "Voting System",  description: "Malaysian voting system with GUI",        image: "portfolio/scripting/spr.webp" },
+       { title: "Report System",  description: "Simple mod call and bug report",        image: "portfolio/scripting/report.webp" },
+       { title: "Football Scoreboard",  description: "LIGA SUPER animated scoreboard",        image: "portfolio/scripting/football.webp" },
     ],
     website: [
-      // { title: "Admin Dashboard",   description: "Real-time game management panel",   image: "portfolio/website/dashboard.png" },
-      // { title: "Portfolio Site",    description: "Custom developer portfolio",         image: "portfolio/website/portfolio.png" },
+       { title: "Ministry of Finance (MCOnet)",   description: "Ministry of Finance dashboard show all information like taxes, announcement, etc.",   image: "portfolio/website/mfa.png" },
+       { title: "MCOnet Government",    description: "Government dashboard show information like all ministry, announcement, etc.",         image: "portfolio/website/gov.png" },
     ],
     graphic: [
-      // { title: "Logo Design",       description: "Brand identity for XYZ group",      image: "portfolio/graphic/logo.png" },
-      // { title: "GFX Banner",        description: "Roblox group banner design",         image: "portfolio/graphic/banner.png" },
+       { title: "HAZMAT Poster",       description: "Monaco fire corps advertisement",      image: "portfolio/graphic/fire.webp" },
+       { title: "Firefighter Poster",        description: "Monaco fire corps advertisement",         image: "portfolio/graphic/fire1.webp" },
+       { title: "UTK Poster",        description: "Created during my free time",         image: "portfolio/graphic/utk.webp" },
+       { title: "Detective vibe poster",        description: "My school homework lol",         image: "portfolio/graphic/banner.webp" },
     ],
   },
 
@@ -856,7 +841,7 @@ const CONFIG = {
   /* ───────────────────────────────────────────────
      QUEUE — how many commission slots are filled
   ─────────────────────────────────────────────── */
-  queueFilled: 2,   // change this number (e.g. 0, 1, 2, 3)
+  queueFilled: 1,   // change this number (e.g. 0, 1, 2, 3)
   queueTotal:  0,   // total slots available
 
 
@@ -869,7 +854,8 @@ const CONFIG = {
   contact: [
     { icon: "💬", name: "Discord",       detail: "Hafiyy#5652",         bg: "rgba(88,101,242,0.12)",  action: "link", url: "https://discord.com/users/974636956715720764" },
     { icon: "🎮", name: "Roblox",        detail: "View My Profile",   bg: "rgba(255,255,255,0.03)", action: "link", url: "https://www.roblox.com/users/3152056465/profile" },
-    { icon: "💵", name: "PayPal / TNG",  detail: "DM me",   bg: "rgba(0,112,186,0.12)",   action: "link", url: "#" },
+    { icon: "💵", name: "PayPal",  detail: "USD Payment",   bg: "rgba(0,112,186,0.12)",   action: "copy", url: "@fiyy13" },
+     { icon: "💵", name: "TNG",  detail: "MYR/RM Payment",   bg: "rgba(0,112,186,0.12)",   action: "copy", url: "171630558086" },
   ],
 
 };
