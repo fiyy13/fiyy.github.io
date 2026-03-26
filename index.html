@@ -750,33 +750,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // THIS RUNS WHEN "CLICK TO ENTER" IS CLICKED
 function startSite() {
-  // 1. Hide the enter screen
+  // 1. Hide the enter screen and start the loader
   document.getElementById('enter-screen').classList.add('gone');
-  
-  // 2. Play Video (Browsers allow it because of the click)
+  setTimeout(() => document.getElementById('loader').classList.add('gone'), 1600);
+
+  // 2. Handle Video
   const v = document.getElementById('bg-vid');
-  if (CONFIG.bgVideo) {
-    v.src = CONFIG.bgVideo;
-    v.play().catch(e => console.log("Video start error:", e));
-  }
-  
-  // 3. Play Music (Browsers allow it because of the click)
-  if (CONFIG.music.length) {
+  v.src = CONFIG.bgVideo;
+  v.play().catch(e => console.warn("Video failed:", e));
+
+  // 3. Handle Music
+  if (CONFIG.music.length > 0) {
+    // Explicitly set the source before playing
     audio.src = CONFIG.music[0].file;
-    audio.volume = volEl.value || 0.35;
+    audio.load(); // Forces the browser to buffer the file
+    
     audio.play().then(() => {
       isPlaying = true;
       document.getElementById('mp-bars').classList.remove('paused');
       document.getElementById('mp-title').textContent = CONFIG.music[0].title;
-    }).catch(e => console.log("Audio play error:", e));
+    }).catch(e => {
+      console.error("Audio block:", e);
+      document.getElementById('mp-title').textContent = "Click to play";
+    });
   }
-
-  // 4. Start the original loader sequence
-  setTimeout(() => document.getElementById('loader').classList.add('gone'), 1600);
 }
 
 function toggleMusic() {
   const bars = document.getElementById('mp-bars');
+  const title = document.getElementById('mp-title');
+
+  if (!audio.src || audio.src.includes(window.location.hostname) && !audio.src.endsWith('.mp3')) {
+     audio.src = CONFIG.music[trackIdx].file;
+  }
+
   if (isPlaying) {
     audio.pause();
     bars.classList.add('paused');
@@ -785,9 +792,9 @@ function toggleMusic() {
     audio.play().then(() => {
       bars.classList.remove('paused');
       isPlaying = true;
-      document.getElementById('mp-title').textContent = CONFIG.music[trackIdx].title;
-    }).catch(err => {
-      copyToast("Music file not found", "Check console");
+      title.textContent = CONFIG.music[trackIdx].title;
+    }).catch(() => {
+      copyToast("Music file missing", "Check path");
     });
   }
 }
