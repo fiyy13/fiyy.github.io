@@ -494,15 +494,325 @@ footer { padding: 36px 48px; border-top: 1px solid var(--bdr); display: flex; al
 .f-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.1); }
 .f-copy { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); }
 
+/* ═══════════════════════════════════════════
+   MOBILE RESPONSIVE
+═══════════════════════════════════════════ */
 @media (max-width: 768px) {
+  /* Enable default cursor on mobile */
+  body { cursor: default; }
+  #cur, #cur-r { display: none; }
+  
+  /* Navigation */
   nav { padding: 14px 20px; }
+  .nav-logo { font-size: 1.4rem; }
   .nav-links, #nav-status-wrap { display: none; }
-  .sec { padding: 64px 20px; }
-  .about-grid, .tos-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
-  footer { flex-direction: column; gap: 12px; text-align: center; }
-  #mp { bottom: 16px; left: 16px; }
-  .mp-info, .mp-vol { display: none; }
+  
+  /* Sections */
+  .sec { padding: 60px 20px; }
+  .sec-title { 
+    font-size: clamp(2.2rem, 12vw, 3.5rem);
+    margin-bottom: 36px;
+  }
+  .sec-label { font-size: 0.55rem; }
+  
+  /* Hero */
+  .hero { 
+    min-height: 100vh; 
+    padding: 80px 20px 40px;
+    justify-content: center;
+  }
+  
+  .glitch { 
+    font-size: clamp(60px, 20vw, 120px);
+    line-height: 0.9;
+  }
+  
+  .hero-tagline { 
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    margin-top: 16px;
+    text-align: center;
+  }
+  
+  .hero-time { 
+    font-size: 0.52rem;
+    margin-bottom: 16px;
+  }
+  
+  .status-pill { 
+    padding: 10px 20px;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    margin-top: 28px;
+  }
+  
+  .hero-scroll { 
+    bottom: 24px;
+  }
+  
+  /* Grids - All Single Column */
+  .about-grid, 
+  .tos-grid, 
+  .contact-grid { 
+    grid-template-columns: 1fr; 
+  }
+  
+  /* About Stats */
+  .about-stat, 
+  .about-bio { 
+    padding: 32px 24px;
+  }
+  
+  .about-stat-n { 
+    font-size: 4rem;
+  }
+  
+  .about-stat-l { 
+    font-size: 0.55rem;
+  }
+  
+  .about-bio p { 
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  
+  .about-time { 
+    padding: 16px 20px;
+    gap: 12px;
+  }
+  
+  .about-time-lbl { 
+    font-size: 0.52rem;
+  }
+  
+  .about-time-val { 
+    font-size: 0.95rem;
+  }
+  
+  /* Portfolio */
+  .ptabs { 
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  
+  .ptab { 
+    padding: 12px 20px;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    flex: 1;
+    min-width: 120px;
+  }
+  
+  .pgrid { 
+    grid-template-columns: 1fr;
+  }
+  
+  .pi { 
+    aspect-ratio: 16/11;
+  }
+  
+  .pi-ov { 
+    opacity: 1;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%);
+  }
+  
+  .pi-title { 
+    font-size: 0.9rem;
+  }
+  
+  .pi-desc { 
+    font-size: 0.68rem;
+  }
+  
+  /* Experience */
+  .exp-row { 
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 24px 20px;
+  }
+  
+  .exp-group { 
+    font-size: 0.95rem;
+  }
+  
+  .exp-role { 
+    font-size: 0.55rem;
+  }
+  
+  .exp-badge { 
+    font-size: 0.55rem;
+    padding: 6px 12px;
+    align-self: flex-start;
+  }
+  
+  /* TOS */
+  .tos-card { 
+    padding: 32px 24px;
+  }
+  
+  .tos-icon { 
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+  
+  .tos-title { 
+    font-size: 0.92rem;
+  }
+  
+  .tos-desc { 
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+  
+  /* Queue */
+  .queue-box { 
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 28px 20px;
+  }
+  
+  .queue-label { 
+    font-size: 0.52rem;
+  }
+  
+  .queue-info { 
+    font-size: 0.92rem;
+  }
+  
+  .queue-sub { 
+    font-size: 0.75rem;
+  }
+  
+  .queue-slots { 
+    justify-content: flex-start;
+  }
+  
+  .q-slot { 
+    width: 100%;
+    max-width: 80px;
+    height: 4px;
+  }
+  
+  /* Contact */
+  .c-link { 
+    padding: 24px 20px;
+    gap: 16px;
+  }
+  
+  .c-icon { 
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+  }
+  
+  .c-name { 
+    font-size: 0.92rem;
+  }
+  
+  .c-detail { 
+    font-size: 0.55rem;
+  }
+  
+  .c-arr { 
+    font-size: 1.2rem;
+  }
+  
+  /* Footer */
+  footer { 
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding: 28px 20px;
+  }
+  
+  .f-logo { 
+    font-size: 1.6rem;
+  }
+  
+  .f-copy { 
+    font-size: 0.52rem;
+  }
+  
+  /* Music Player */
+  #mp { 
+    bottom: 16px;
+    left: 16px;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+  
+  .mp-info, 
+  .mp-vol { 
+    display: none;
+  }
+  
+  .mp-bars { 
+    height: 14px;
+  }
+  
+  /* Toast */
+  #toast { 
+    font-size: 0.55rem;
+    padding: 10px 20px;
+    bottom: 80px;
+  }
+  
+  /* Enter Screen */
+  .enter-text { 
+    font-size: 0.62rem;
+    letter-spacing: 0.4em;
+  }
+  
+  /* Loader */
+  .ld-name { 
+    font-size: 3.5rem;
+  }
+  
+  .ld-bar-wrap { 
+    width: 180px;
+  }
+  
+  .ld-txt { 
+    font-size: 0.52rem;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 480px) {
+  .glitch { 
+    font-size: clamp(50px, 18vw, 90px);
+  }
+  
+  .hero-tagline { 
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+  }
+  
+  .sec-title { 
+    font-size: clamp(2rem, 11vw, 3rem);
+  }
+  
+  .about-stat-n { 
+    font-size: 3.5rem;
+  }
+  
+  .ptab { 
+    padding: 10px 14px;
+    font-size: 0.5rem;
+    min-width: 100px;
+  }
+  
+  .pi { 
+    aspect-ratio: 16/12;
+  }
+  
+  .ld-name { 
+    font-size: 3rem;
+  }
+  
+  .ld-bar-wrap { 
+    width: 150px;
+  }
 }
 </style>
 </head>
