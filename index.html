@@ -519,6 +519,23 @@ footer { padding: 36px 48px; border-top: 1px solid var(--bdr); display: flex; al
 
 <!-- FIREBASE -->
 <script type="module">
+  import { getAuth, signInWithEmailAndPassword } 
+  from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
+const auth = getAuth(app);
+
+window.adminLogin = async () => {
+  const email = prompt("Email:");
+  const password = prompt("Password:");
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("Logged in as admin");
+    loadReviews();
+  } catch (e) {
+    alert("Login failed");
+  }
+};
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
   import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
   const app = initializeApp({
@@ -771,7 +788,9 @@ function cardHtml(r, isSlider = false) {
     ? new Date(r.timestamp.seconds * 1000).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
     : 'Just now';
   const stars = '⭐'.repeat(r.rating);
-  const isAdmin = localStorage.getItem('fiyy_admin') === 'true';
+  import { getAuth } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
+const isAdmin = getAuth().currentUser != null;
   const del = isAdmin ? `<button class="delete-btn" onclick="deleteReview('${r.id}')">Delete</button>` : '';
   const w = isSlider ? `min-width:min(400px, 100vw - 40px);` : '';
   return `<div class="review-card" style="${w}">${del}
@@ -797,7 +816,7 @@ function updateSlider() {
 
 async function deleteReview(id) {
   const pw = prompt('Admin password:');
-  if (pw !== 'fiyy13_Admin') { copyToast('', 'Wrong password!'); return; }
+   { copyToast('', 'Wrong password!'); return; }
   try {
     const { deleteDoc, doc } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
     await deleteDoc(doc(window.db, 'reviews', id));
