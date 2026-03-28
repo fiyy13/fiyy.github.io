@@ -482,7 +482,6 @@ footer { padding: 36px 48px; border-top: 1px solid var(--bdr); display: flex; al
 
   <div class="hr"></div>
 
-  <!-- ═══ REVIEWS (display only) ═══ -->
   <section class="sec" id="reviews">
     <div class="sec-label rv">004.5 — Client Feedback</div>
     <div class="sec-title rv">Reviews.</div>
@@ -519,25 +518,10 @@ footer { padding: 36px 48px; border-top: 1px solid var(--bdr); display: flex; al
 
 <!-- FIREBASE -->
 <script type="module">
-  import { getAuth, signInWithEmailAndPassword } 
-  from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-
-const auth = getAuth(app);
-
-window.adminLogin = async () => {
-  const email = prompt("Email:");
-  const password = prompt("Password:");
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    alert("Logged in as admin");
-    loadReviews();
-  } catch (e) {
-    alert("Login failed");
-  }
-};
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
   import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+  import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+  
   const app = initializeApp({
     apiKey: "AIzaSyDMKcvkIPuqYrY0VNYWlk7hTbWsM9oI0Qk",
     authDomain: "fiyy13-portfolio.firebaseapp.com",
@@ -546,7 +530,23 @@ window.adminLogin = async () => {
     messagingSenderId: "1090998456947",
     appId: "1:1090998456947:web:07dd09967558268dca1006"
   });
+  
   window.db = getFirestore(app);
+  window.auth = getAuth(app);
+  
+  window.adminLogin = async () => {
+    const email = prompt("Email:");
+    const password = prompt("Password:");
+    
+    try {
+      await signInWithEmailAndPassword(window.auth, email, password);
+      copyToast('', 'Logged in as admin');
+      loadReviews();
+    } catch (e) {
+      copyToast('', 'Login failed');
+    }
+  };
+  
   window.addEventListener('load', loadReviews);
 </script>
 
@@ -740,7 +740,6 @@ async function loadReviews() {
     renderReviews();
   } catch (err) {
     document.getElementById('no-reviews').textContent = 'Could not load reviews.';
-    document.getElementById('reviews-count').textContent = '';
   }
 }
 
@@ -749,10 +748,6 @@ function renderReviews() {
   const gridEl = document.getElementById('reviews-grid');
   const sliderEl = document.getElementById('reviews-slider');
   const navEl = document.getElementById('slider-nav');
-  const countEl = document.getElementById('reviews-count');
-   if (countEl) {
-     countEl.textContent = `${reviews.length} review${reviews.length !== 1 ? 's' : ''}`;
-}
 
   if (reviews.length === 0) {
     noEl.textContent = 'No reviews yet.';
@@ -788,9 +783,7 @@ function cardHtml(r, isSlider = false) {
     ? new Date(r.timestamp.seconds * 1000).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
     : 'Just now';
   const stars = '⭐'.repeat(r.rating);
-  import { getAuth } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-
-const isAdmin = getAuth().currentUser != null;
+  const isAdmin = window.auth && window.auth.currentUser != null;
   const del = isAdmin ? `<button class="delete-btn" onclick="deleteReview('${r.id}')">Delete</button>` : '';
   const w = isSlider ? `min-width:min(400px, 100vw - 40px);` : '';
   return `<div class="review-card" style="${w}">${del}
@@ -799,58 +792,26 @@ const isAdmin = getAuth().currentUser != null;
     <div class="review-date">${date}</div>
   </div>`;
 }
-function startSite() {
-    // 1. Hide the enter screen
-    const enterScreen = document.getElementById('enter-screen');
-    enterScreen.classList.add('gone');
 
-    // 2. Start the background video
-    const video = document.getElementById('bg-vid');
-    video.src = CONFIG.bgVideo;
-    video.play();
-
-    // 3. Handle the loader (optional delay for effect)
-    setTimeout(() => {
-      const loader = document.getElementById('loader');
-      loader.classList.add('gone');
-      
-      // 4. Trigger the reveal animations for the hero section
-      const reveals = document.querySelectorAll('.rv');
-      reveals.forEach(el => el.classList.add('in'));
-    }, 2000); // 2 seconds to show off your cool loader
-  }
-
-  // Add the cursor tracking logic so it actually moves
-  const cur = document.getElementById('cur');
-  const curR = document.getElementById('cur-r');
-
-  window.addEventListener('mousemove', (e) => {
-    cur.style.left = e.clientX + 'px';
-    cur.style.top = e.clientY + 'px';
-    
-    // Smooth trailing effect for the outer circle
-    curR.animate({
-      left: e.clientX - 15 + 'px',
-      top: e.clientY - 15 + 'px'
-    }, { duration: 500, fill: "forwards" });
-  });
 function startSlider() {
   if (slideInterval) clearInterval(slideInterval);
   slideInterval = setInterval(nextSlide, 5000);
 }
+
 function nextSlide() { currentSlide = (currentSlide + 1) % reviews.length; updateSlider(); }
 function prevSlide() { currentSlide = (currentSlide - 1 + reviews.length) % reviews.length; updateSlider(); startSlider(); }
 function goToSlide(i) { currentSlide = i; updateSlider(); startSlider(); }
+
 function updateSlider() {
   const el = document.getElementById('reviews-slider');
-  const w = Math.min(400, window.innerWidth - 40);
-  el.style.transform = `translateX(-${currentSlide * w}px)`;
+  const cardWidth = Math.min(400, window.innerWidth - 40);
+  el.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
   document.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
 }
 
 async function deleteReview(id) {
   const pw = prompt('Admin password:');
-   { copyToast('', 'Wrong password!'); return; }
+  if (pw !== 'fiyy2026') { copyToast('', 'Wrong password!'); return; }
   try {
     const { deleteDoc, doc } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
     await deleteDoc(doc(window.db, 'reviews', id));
@@ -858,9 +819,6 @@ async function deleteReview(id) {
     loadReviews();
   } catch { copyToast('', 'Failed to delete'); }
 }
-
-window.enableAdmin = () => { localStorage.setItem('fiyy_admin','true'); copyToast('','Admin on'); loadReviews(); };
-window.disableAdmin = () => { localStorage.removeItem('fiyy_admin'); copyToast('','Admin off'); loadReviews(); };
 
 function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
 </script>
