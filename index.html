@@ -9,247 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════
-   FEEDBACK SECTION
-═══════════════════════════════════════════ */
-.feedback-form {
-  background: var(--bg); 
-  border: 1px solid var(--bdr); 
-  padding: 48px;
-  margin-top: 1px;
-}
- 
-.form-group {
-  margin-bottom: 24px;
-}
- 
-.form-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--c);
-  display: block;
-  margin-bottom: 10px;
-}
- 
-.form-input {
-  width: 100%;
-  background: var(--bg2);
-  border: 1px solid var(--bdr);
-  color: var(--txt);
-  padding: 14px 18px;
-  font-family: 'Syne', sans-serif;
-  font-size: 0.92rem;
-  transition: border-color 0.2s;
-}
- 
-.form-input:focus {
-  outline: none;
-  border-color: var(--c);
-  box-shadow: 0 0 12px rgba(0,240,255,0.15);
-}
- 
-.form-textarea {
-  min-height: 120px;
-  resize: vertical;
-  font-family: 'Syne', sans-serif;
-}
- 
-.rating-stars {
-  display: flex;
-  gap: 12px;
-  margin-top: 10px;
-}
- 
-.star-btn {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: var(--dim);
-  transition: all 0.2s;
-  filter: grayscale(1);
-}
- 
-.star-btn:hover,
-.star-btn.active {
-  color: #fbbf24;
-  filter: grayscale(0);
-  transform: scale(1.15);
-}
- 
-.submit-btn {
-  background: var(--c);
-  color: #000;
-  border: none;
-  padding: 14px 36px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 0 20px rgba(0,240,255,0.3);
-}
- 
-.submit-btn:hover {
-  box-shadow: 0 0 30px rgba(0,240,255,0.6);
-  transform: translateY(-2px);
-}
- 
-.submit-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
- 
-/* ═══════════════════════════════════════════
-   REVIEWS DISPLAY
-═══════════════════════════════════════════ */
-.reviews-container {
-  position: relative;
-  overflow: hidden;
-  margin-top: 1px;
-  border: 1px solid var(--bdr);
-}
- 
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1px;
-  background: var(--bdr);
-}
- 
-.reviews-slider {
-  display: flex;
-  transition: transform 0.5s ease;
-}
- 
-.review-card {
-  background: var(--bg);
-  padding: 32px;
-  min-width: 400px;
-  flex-shrink: 0;
-  border-right: 1px solid var(--bdr);
-  position: relative;
-}
- 
-.review-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
- 
-.review-name {
-  font-weight: 700;
-  font-size: 1rem;
-  color: #fff;
-}
- 
-.review-stars {
-  color: #fbbf24;
-  font-size: 1rem;
-}
- 
-.review-text {
-  color: var(--dim);
-  line-height: 1.7;
-  font-size: 0.9rem;
-  margin-bottom: 16px;
-}
- 
-.review-date {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
- 
-.delete-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: rgba(239,68,68,0.1);
-  border: 1px solid rgba(239,68,68,0.3);
-  color: #ef4444;
-  padding: 6px 12px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.55rem;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.2s;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
- 
-.review-card:hover .delete-btn {
-  opacity: 1;
-}
- 
-.delete-btn:hover {
-  background: rgba(239,68,68,0.2);
-}
- 
-.slider-dots {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  padding: 20px;
-  background: var(--bg);
-}
- 
-.slider-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--dim);
-  cursor: pointer;
-  transition: all 0.3s;
-}
- 
-.slider-dot.active {
-  background: var(--c);
-  box-shadow: 0 0 10px var(--c);
-  transform: scale(1.3);
-}
- 
-.no-reviews {
-  background: var(--bg);
-  padding: 60px;
-  text-align: center;
-  color: var(--dim);
-  font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-}
- 
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .feedback-form {
-    padding: 32px 24px;
-  }
-  
-  .review-card {
-    min-width: 100%;
-    padding: 24px;
-  }
-  
-  .reviews-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .rating-stars {
-    gap: 8px;
-  }
-  
-  .star-btn {
-    font-size: 1.6rem;
-  }
-}
-/* ═══════════════════════════════════════════
    BASE RESET
 ═══════════════════════════════════════════ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -280,7 +39,7 @@ body {
 }
 
 /* ═══════════════════════════════════════════
-   ENTER SCREEN (NEW)
+   ENTER SCREEN
 ═══════════════════════════════════════════ */
 #enter-screen {
   position: fixed; inset: 0; z-index: 10000;
@@ -304,107 +63,45 @@ body {
   position: fixed; inset: 0;
   background: #000;
   z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
   gap: 28px;
   transition: opacity 0.9s ease, visibility 0.9s ease;
 }
 #loader.gone { opacity: 0; visibility: hidden; pointer-events: none; }
-.ld-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 4.5rem;
-  letter-spacing: 0.35em;
-  color: #fff;
-}
+.ld-name { font-family: 'Bebas Neue', sans-serif; font-size: 4.5rem; letter-spacing: 0.35em; color: #fff; }
 .ld-bar-wrap { width: 220px; height: 1px; background: rgba(255,255,255,0.08); overflow: hidden; }
 .ld-bar {
-  height: 1px;
-  background: var(--c);
-  box-shadow: 0 0 12px var(--c);
-  width: 0;
-  animation: ld-fill 1.3s cubic-bezier(0.4,0,0.2,1) forwards 0.4s;
+  height: 1px; background: var(--c); box-shadow: 0 0 12px var(--c);
+  width: 0; animation: ld-fill 1.3s cubic-bezier(0.4,0,0.2,1) forwards 0.4s;
 }
 @keyframes ld-fill { to { width: 100%; } }
-.ld-txt {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
+.ld-txt { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--dim); }
 
 /* ═══════════════════════════════════════════
    CURSOR
 ═══════════════════════════════════════════ */
-#cur {
-  width: 7px; height: 7px;
-  background: var(--c);
-  border-radius: 50%;
-  position: fixed; z-index: 9990;
-  pointer-events: none;
-  box-shadow: 0 0 16px var(--c), 0 0 32px rgba(0,240,255,0.4);
-  mix-blend-mode: screen;
-  transition: transform 0.15s;
-}
-#cur-r {
-  width: 30px; height: 30px;
-  border: 1px solid rgba(0,240,255,0.35);
-  border-radius: 50%;
-  position: fixed; z-index: 9989;
-  pointer-events: none;
-  transition: transform 0.2s, border-color 0.2s;
-}
+#cur { width: 7px; height: 7px; background: var(--c); border-radius: 50%; position: fixed; z-index: 9990; pointer-events: none; box-shadow: 0 0 16px var(--c), 0 0 32px rgba(0,240,255,0.4); mix-blend-mode: screen; transition: transform 0.15s; }
+#cur-r { width: 30px; height: 30px; border: 1px solid rgba(0,240,255,0.35); border-radius: 50%; position: fixed; z-index: 9989; pointer-events: none; transition: transform 0.2s, border-color 0.2s; }
 body.hovering #cur { transform: scale(3.5); }
 body.hovering #cur-r { transform: scale(1.6); border-color: rgba(0,240,255,0.7); }
 
 /* ═══════════════════════════════════════════
-   VIDEO BACKGROUND (FIXED VISIBILITY)
+   VIDEO BACKGROUND
 ═══════════════════════════════════════════ */
-#vbg {
-  position: fixed; inset: 0; z-index: 0; overflow: hidden; background: #000;
-}
-#vbg video {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0.35; /* Increased from 0.12 */
-  filter: saturate(1) brightness(0.8); /* Removed heavy darkening */
-}
-#vbg::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%);
-}
-#vbg-fallback {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 20% 50%, rgba(0,240,255,0.025) 0%, transparent 50%),
-              radial-gradient(ellipse at 80% 50%, rgba(124,58,237,0.03) 0%, transparent 50%);
-  animation: bg-shift 20s ease-in-out infinite alternate;
-}
+#vbg { position: fixed; inset: 0; z-index: 0; overflow: hidden; background: #000; }
+#vbg video { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; filter: saturate(1) brightness(0.8); }
+#vbg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%); }
+#vbg-fallback { position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(0,240,255,0.025) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, rgba(124,58,237,0.03) 0%, transparent 50%); animation: bg-shift 20s ease-in-out infinite alternate; }
 @keyframes bg-shift { from { opacity: 0.6; } to { opacity: 1; } }
 
 /* ═══════════════════════════════════════════
    OVERLAYS
 ═══════════════════════════════════════════ */
-.scanlines {
-  position: fixed; inset: 0; z-index: 1; pointer-events: none;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px);
-}
-.vignette {
-  position: fixed; inset: 0; z-index: 1; pointer-events: none;
-  background: radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.7) 100%);
-}
-.ticker {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  height: 1px; overflow: hidden;
-}
-.ticker::after {
-  content: ''; position: absolute;
-  top: 0; left: -30%; width: 30%; height: 1px;
-  background: linear-gradient(to right, transparent, var(--c), transparent);
-  animation: tick-slide 3s ease-in-out infinite;
-}
+.scanlines { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px); }
+.vignette { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.7) 100%); }
+.ticker { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 1px; overflow: hidden; }
+.ticker::after { content: ''; position: absolute; top: 0; left: -30%; width: 30%; height: 1px; background: linear-gradient(to right, transparent, var(--c), transparent); animation: tick-slide 3s ease-in-out infinite; }
 @keyframes tick-slide { to { left: 130%; } }
 
 /* ═══════════════════════════════════════════
@@ -412,139 +109,52 @@ body.hovering #cur-r { transform: scale(1.6); border-color: rgba(0,240,255,0.7);
 ═══════════════════════════════════════════ */
 .wrap { position: relative; z-index: 10; }
 
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 48px;
-  backdrop-filter: blur(24px);
-  background: rgba(3,3,3,0.6);
-  border-bottom: 1px solid var(--bdr);
-}
-.nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.75rem; letter-spacing: 0.12em;
-  color: var(--c);
-  text-shadow: 0 0 24px rgba(0,240,255,0.5);
-}
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 48px; backdrop-filter: blur(24px); background: rgba(3,3,3,0.6); border-bottom: 1px solid var(--bdr); }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.75rem; letter-spacing: 0.12em; color: var(--c); text-shadow: 0 0 24px rgba(0,240,255,0.5); }
 .nav-links { display: flex; gap: 36px; list-style: none; }
-.nav-links a {
-  color: var(--dim); text-decoration: none;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
-  transition: color 0.2s;
-}
+.nav-links a { color: var(--dim); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; transition: color 0.2s; }
 .nav-links a:hover { color: var(--txt); }
 #nav-status-wrap { display: flex; align-items: center; }
 
 /* ═══════════════════════════════════════════
    HERO
 ═══════════════════════════════════════════ */
-.hero {
-  min-height: 100vh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center; padding: 0 24px;
-  position: relative;
-}
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 24px; position: relative; }
 
-.glitch {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(110px, 18vw, 270px);
-  line-height: 0.85;
-  color: #fff;
-  position: relative;
-  letter-spacing: -0.01em;
-  user-select: none;
-}
-.glitch::before, .glitch::after {
-  content: attr(data-text);
-  position: absolute; left: 0; top: 0;
-  width: 100%; height: 100%;
-}
-.glitch::before {
-  color: var(--c);
-  animation: gx1 5s infinite;
-  clip-path: polygon(0 0, 100% 0, 100% 42%, 0 42%);
-  opacity: 0.75;
-}
-.glitch::after {
-  color: var(--c2);
-  animation: gx2 5s infinite;
-  clip-path: polygon(0 58%, 100% 58%, 100% 100%, 0 100%);
-  opacity: 0.75;
-}
-@keyframes gx1 {
-  0%, 88%, 100% { transform: none; }
-  90%  { transform: translate(-5px, 1px) skewX(-1deg); }
-  92%  { transform: translate(5px, -2px) skewX(1deg); }
-  94%  { transform: translate(-2px, 1px); }
-}
-@keyframes gx2 {
-  0%, 85%, 100% { transform: none; }
-  87%  { transform: translate(5px, -1px) skewX(1deg); }
-  89%  { transform: translate(-4px, 2px) skewX(-1deg); }
-  92%  { transform: translate(2px, -1px); }
-}
+.glitch { font-family: 'Bebas Neue', sans-serif; font-size: clamp(110px, 18vw, 270px); line-height: 0.85; color: #fff; position: relative; letter-spacing: -0.01em; user-select: none; }
+.glitch::before, .glitch::after { content: attr(data-text); position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.glitch::before { color: var(--c); animation: gx1 5s infinite; clip-path: polygon(0 0, 100% 0, 100% 42%, 0 42%); opacity: 0.75; }
+.glitch::after { color: var(--c2); animation: gx2 5s infinite; clip-path: polygon(0 58%, 100% 58%, 100% 100%, 0 100%); opacity: 0.75; }
+@keyframes gx1 { 0%, 88%, 100% { transform: none; } 90% { transform: translate(-5px, 1px) skewX(-1deg); } 92% { transform: translate(5px, -2px) skewX(1deg); } 94% { transform: translate(-2px, 1px); } }
+@keyframes gx2 { 0%, 85%, 100% { transform: none; } 87% { transform: translate(5px, -1px) skewX(1deg); } 89% { transform: translate(-4px, 2px) skewX(-1deg); } 92% { transform: translate(2px, -1px); } }
 
-.hero-tagline {
-  font-family: 'Space Mono', monospace;
-  font-size: clamp(0.62rem, 1.2vw, 0.78rem);
-  letter-spacing: 0.45em; text-transform: uppercase;
-  color: var(--dim); margin-top: 20px;
-}
+.hero-tagline { font-family: 'Space Mono', monospace; font-size: clamp(0.62rem, 1.2vw, 0.78rem); letter-spacing: 0.45em; text-transform: uppercase; color: var(--dim); margin-top: 20px; }
 .hero-tagline .ac { color: var(--c); }
 
-.status-pill {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 10px 26px; border-radius: 100px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
-  cursor: pointer; transition: all 0.3s; border: 1px solid;
-  margin-top: 36px;
-}
+.status-pill { display: inline-flex; align-items: center; gap: 10px; padding: 10px 26px; border-radius: 100px; font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; border: 1px solid; margin-top: 36px; }
 .status-pill.av { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.4); color: #10b981; }
-.status-pill.bz { background: rgba(239,68,68,0.08);  border-color: rgba(239,68,68,0.4);  color: #ef4444; }
+.status-pill.bz { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.4); color: #ef4444; }
 .sdot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; animation: sdot-pulse 1.6s infinite; }
 @keyframes sdot-pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.5; transform:scale(1.4); } }
 
-.hero-scroll {
-  position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
-  animation: hs-float 2.5s ease-in-out infinite;
-}
+.hero-scroll { position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; animation: hs-float 2.5s ease-in-out infinite; }
 .hero-scroll span { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--dim); }
 .hs-line { width: 1px; height: 44px; background: linear-gradient(to bottom, var(--c), transparent); }
 @keyframes hs-float { 0%,100%{ transform: translateX(-50%) translateY(0); } 50%{ transform: translateX(-50%) translateY(8px); } }
 
-.hero-time {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--dim); margin-bottom: 20px;
-}
+.hero-time { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 20px; }
 .hero-time .ac { color: var(--c); font-weight: 700; }
 
 /* ═══════════════════════════════════════════
    SECTIONS
 ═══════════════════════════════════════════ */
 .sec { padding: 100px 48px; max-width: 1440px; margin: 0 auto; }
-.sec-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.6rem; letter-spacing: 0.45em; text-transform: uppercase;
-  color: var(--c); margin-bottom: 10px;
-}
-.sec-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.8rem, 6vw, 5.5rem);
-  line-height: 0.88; letter-spacing: 0.02em; color: #fff;
-  margin-bottom: 60px;
-}
+.sec-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--c); margin-bottom: 10px; }
+.sec-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 6vw, 5.5rem); line-height: 0.88; letter-spacing: 0.02em; color: #fff; margin-bottom: 60px; }
 
 .hr { width: 100%; height: 1px; background: var(--bdr); max-width: 1440px; margin: 0 auto; }
 
-.rv {
-  opacity: 0; transform: translateY(36px);
-  transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1), transform 0.85s cubic-bezier(0.16,1,0.3,1);
-}
+.rv { opacity: 0; transform: translateY(36px); transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1), transform 0.85s cubic-bezier(0.16,1,0.3,1); }
 .rv.in { opacity: 1; transform: none; }
 .d1 { transition-delay: 0.08s; }
 .d2 { transition-delay: 0.16s; }
@@ -571,68 +181,27 @@ nav {
    PORTFOLIO
 ═══════════════════════════════════════════ */
 .ptabs { display: flex; gap: 0; border-bottom: 1px solid var(--bdr); margin-bottom: 1px; }
-.ptab {
-  padding: 16px 36px;
-  background: none; border: none;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--dim); cursor: pointer;
-  position: relative; transition: color 0.2s;
-}
-.ptab::after {
-  content: ''; position: absolute;
-  bottom: -1px; left: 0; right: 0;
-  height: 1px; background: var(--c);
-  transform: scaleX(0); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
-}
+.ptab { padding: 16px 36px; background: none; border: none; font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); cursor: pointer; position: relative; transition: color 0.2s; }
+.ptab::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 1px; background: var(--c); transform: scaleX(0); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
 .ptab:hover { color: #fff; }
 .ptab.on { color: #fff; }
 .ptab.on::after { transform: scaleX(1); }
 
-.pgrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1px; background: var(--bdr);
-  border: 1px solid var(--bdr);
-  min-height: 200px;
-}
-.pi {
-  position: relative; aspect-ratio: 16/10;
-  overflow: hidden; background: var(--bg2);
-  cursor: pointer;
-}
-.pi img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.4s;
-  filter: saturate(0.6) brightness(0.85);
-}
+.pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1px; background: var(--bdr); border: 1px solid var(--bdr); min-height: 200px; }
+.pi { position: relative; aspect-ratio: 16/10; overflow: hidden; background: var(--bg2); cursor: pointer; }
+.pi img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.4s; filter: saturate(0.6) brightness(0.85); }
 .pi:hover img { transform: scale(1.06); filter: saturate(1) brightness(1); }
-.pi-ov {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0) 55%);
-  display: flex; align-items: flex-end; padding: 24px;
-  opacity: 0; transition: opacity 0.3s;
-}
+.pi-ov { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0) 55%); display: flex; align-items: flex-end; padding: 24px; opacity: 0; transition: opacity 0.3s; }
 .pi:hover .pi-ov { opacity: 1; }
 .pi-title { font-weight: 800; font-size: 0.95rem; color: #fff; }
-.pi-desc  { font-size: 0.72rem; color: rgba(255,255,255,0.55); margin-top: 3px; }
+.pi-desc { font-size: 0.72rem; color: rgba(255,255,255,0.55); margin-top: 3px; }
 
 /* ═══════════════════════════════════════════
    EXPERIENCE
 ═══════════════════════════════════════════ */
 .exp-list { display: flex; flex-direction: column; gap: 1px; background: var(--bdr); border: 1px solid var(--bdr); }
-.exp-row {
-  display: grid; grid-template-columns: 1fr auto;
-  align-items: center; padding: 28px 36px;
-  background: var(--bg); transition: background 0.2s;
-  position: relative; overflow: hidden;
-}
-.exp-row::before {
-  content: ''; position: absolute;
-  left: 0; top: 0; bottom: 0; width: 2px;
-  background: var(--c); transform: scaleY(0);
-  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
-}
+.exp-row { display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 28px 36px; background: var(--bg); transition: background 0.2s; position: relative; overflow: hidden; }
+.exp-row::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--c); transform: scaleY(0); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
 .exp-row:hover { background: var(--bg2); }
 .exp-row:hover::before { transform: scaleY(1); }
 .exp-group { font-weight: 800; font-size: 1.05rem; color: #fff; }
@@ -649,12 +218,7 @@ nav {
 .tos-title { font-weight: 800; font-size: 1rem; color: #fff; margin-bottom: 10px; }
 .tos-desc { font-size: 0.85rem; line-height: 1.65; color: var(--dim); }
 
-.queue-box {
-  margin-top: 1px; padding: 40px;
-  background: var(--bg); border: 1px solid var(--bdr);
-  display: grid; grid-template-columns: 1fr auto;
-  align-items: center; gap: 40px;
-}
+.queue-box { margin-top: 1px; padding: 40px; background: var(--bg); border: 1px solid var(--bdr); display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 40px; }
 .queue-label { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 10px; }
 .queue-info { font-weight: 700; font-size: 1rem; color: #fff; }
 .queue-sub { font-size: 0.8rem; color: var(--dim); margin-top: 4px; }
@@ -662,61 +226,68 @@ nav {
 .q-slot { width: 64px; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.08); }
 .q-slot.on { background: var(--c); box-shadow: 0 0 10px var(--c); }
 
-   <div class="hr"></div>
- 
-<section class="sec" id="feedback">
-  <div class="sec-label rv">004.5 — Client Feedback</div>
-  <div class="sec-title rv">Reviews.</div>
-  
-  <!-- Reviews Display -->
-  <div class="reviews-container rv" id="reviews-container">
-    <div class="no-reviews" id="no-reviews">Loading reviews...</div>
-    <div class="reviews-grid" id="reviews-grid" style="display:none;"></div>
-    <div class="reviews-slider" id="reviews-slider" style="display:none;"></div>
-    <div class="slider-dots" id="slider-dots" style="display:none;"></div>
-  </div>
- 
-  <!-- Feedback Form -->
-  <div class="feedback-form rv">
-    <form id="feedback-form">
-      <div class="form-group">
-        <label class="form-label">Your Name / Roblox Username</label>
-        <input type="text" class="form-input" id="name-input" required maxlength="50">
-      </div>
- 
-      <div class="form-group">
-        <label class="form-label">Rating</label>
-        <div class="rating-stars" id="rating-stars">
-          <button type="button" class="star-btn" data-rating="1">⭐</button>
-          <button type="button" class="star-btn" data-rating="2">⭐</button>
-          <button type="button" class="star-btn" data-rating="3">⭐</button>
-          <button type="button" class="star-btn" data-rating="4">⭐</button>
-          <button type="button" class="star-btn" data-rating="5">⭐</button>
-        </div>
-        <input type="hidden" id="rating-value" required>
-      </div>
- 
-      <div class="form-group">
-        <label class="form-label">Your Feedback</label>
-        <textarea class="form-input form-textarea" id="feedback-input" required maxlength="500"></textarea>
-      </div>
- 
-      <button type="submit" class="submit-btn" id="submit-btn">Submit Review</button>
-    </form>
-  </div>
-</section>
+/* ═══════════════════════════════════════════
+   REVIEWS (display only)
+═══════════════════════════════════════════ */
+.reviews-top {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1px;
+}
+.reviews-count-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--dim);
+}
+.leave-review-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 22px;
+  background: none;
+  border: 1px solid var(--bdr);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--dim);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.leave-review-btn:hover { border-color: var(--c); color: var(--c); }
+.leave-review-btn .arr { transition: transform 0.2s; }
+.leave-review-btn:hover .arr { transform: translate(3px, -3px); }
+
+.reviews-container { position: relative; overflow: hidden; border: 1px solid var(--bdr); }
+
+.reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1px; background: var(--bdr); }
+
+.reviews-slider { display: flex; transition: transform 0.5s ease; }
+
+.review-card { background: var(--bg); padding: 32px; position: relative; transition: background 0.2s; }
+.review-card:hover { background: var(--bg2); }
+
+.review-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.review-name { font-weight: 800; font-size: 1rem; color: #fff; }
+.review-stars { color: #fbbf24; font-size: 1rem; letter-spacing: 2px; }
+.review-text { color: var(--dim); line-height: 1.7; font-size: 0.88rem; margin-bottom: 14px; }
+.review-date { font-family: 'Space Mono', monospace; font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); opacity: 0.6; }
+
+.delete-btn { position: absolute; top: 12px; right: 12px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; padding: 5px 10px; font-family: 'Space Mono', monospace; font-size: 0.52rem; cursor: pointer; opacity: 0; transition: opacity 0.2s; text-transform: uppercase; letter-spacing: 0.1em; }
+.review-card:hover .delete-btn { opacity: 1; }
+.delete-btn:hover { background: rgba(239,68,68,0.2); }
+
+.slider-nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 28px; background: var(--bg); border-top: 1px solid var(--bdr); }
+.slider-dots { display: flex; gap: 8px; }
+.slider-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--dim); cursor: pointer; transition: all 0.3s; }
+.slider-dot.active { background: var(--c); box-shadow: 0 0 10px var(--c); transform: scale(1.3); }
+.slider-arrows { display: flex; gap: 8px; }
+.slider-arrow { background: none; border: 1px solid var(--bdr); color: var(--dim); width: 32px; height: 32px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+.slider-arrow:hover { border-color: var(--c); color: var(--c); }
+
+.no-reviews { background: var(--bg); padding: 60px; text-align: center; color: var(--dim); font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; }
+
 /* ═══════════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════════ */
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--bdr); border: 1px solid var(--bdr); }
-.c-link {
-  display: flex; align-items: center; gap: 22px;
-  padding: 30px 36px; background: var(--bg);
-  text-decoration: none; color: var(--txt);
-  cursor: pointer; transition: background 0.2s;
-  border: none; text-align: left; width: 100%;
-  font-family: 'Syne', sans-serif;
-}
+.c-link { display: flex; align-items: center; gap: 22px; padding: 30px 36px; background: var(--bg); text-decoration: none; color: var(--txt); cursor: pointer; transition: background 0.2s; border: none; text-align: left; width: 100%; font-family: 'Syne', sans-serif; }
 .c-link:hover { background: var(--bg2); }
 .c-icon { width: 52px; height: 52px; background: var(--bg3); border: 1px solid var(--bdr); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; }
 .c-name { font-weight: 800; font-size: 1rem; color: #fff; }
@@ -727,36 +298,19 @@ nav {
 /* ═══════════════════════════════════════════
    MUSIC PLAYER
 ═══════════════════════════════════════════ */
-#mp {
-  position: fixed; bottom: 28px; left: 28px; z-index: 200;
-  display: flex; align-items: center; gap: 14px;
-  padding: 13px 22px;
-  background: rgba(3,3,3,0.88);
-  border: 1px solid var(--bdr);
-  backdrop-filter: blur(24px);
-  cursor: pointer; user-select: none;
-  transition: border-color 0.3s;
-}
+#mp { position: fixed; bottom: 28px; left: 28px; z-index: 200; display: flex; align-items: center; gap: 14px; padding: 13px 22px; background: rgba(3,3,3,0.88); border: 1px solid var(--bdr); backdrop-filter: blur(24px); cursor: pointer; user-select: none; transition: border-color 0.3s; }
 #mp:hover { border-color: rgba(0,240,255,0.35); }
-
 .mp-bars { display: flex; align-items: flex-end; gap: 2.5px; height: 16px; }
-.mp-bar {
-  width: 3px; background: var(--c);
-  box-shadow: 0 0 6px var(--c);
-  border-radius: 2px; transform-origin: bottom;
-  animation: bar 0.9s ease-in-out infinite;
-}
-.mp-bar:nth-child(1) { height: 9px;  animation-delay: 0s;     }
-.mp-bar:nth-child(2) { height: 15px; animation-delay: 0.18s;  }
-.mp-bar:nth-child(3) { height: 7px;  animation-delay: 0.36s;  }
-.mp-bar:nth-child(4) { height: 13px; animation-delay: 0.54s;  }
-.mp-bar:nth-child(5) { height: 10px; animation-delay: 0.27s;  }
+.mp-bar { width: 3px; background: var(--c); box-shadow: 0 0 6px var(--c); border-radius: 2px; transform-origin: bottom; animation: bar 0.9s ease-in-out infinite; }
+.mp-bar:nth-child(1) { height: 9px; animation-delay: 0s; }
+.mp-bar:nth-child(2) { height: 15px; animation-delay: 0.18s; }
+.mp-bar:nth-child(3) { height: 7px; animation-delay: 0.36s; }
+.mp-bar:nth-child(4) { height: 13px; animation-delay: 0.54s; }
+.mp-bar:nth-child(5) { height: 10px; animation-delay: 0.27s; }
 @keyframes bar { 0%,100% { transform: scaleY(0.25); } 50% { transform: scaleY(1); } }
 .mp-bars.paused .mp-bar { animation-play-state: paused; transform: scaleY(0.25); }
-
 .mp-info { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mp-info b { color: var(--txt); font-weight: 400; }
-
 .mp-vol { display: flex; align-items: center; gap: 8px; }
 .mp-vol-icon { font-size: 0.7rem; color: var(--dim); }
 input[type=range].mp-slider { -webkit-appearance: none; width: 70px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; outline: none; }
@@ -765,13 +319,7 @@ input[type=range].mp-slider::-webkit-slider-thumb { -webkit-appearance: none; wi
 /* ═══════════════════════════════════════════
    TOAST & FOOTER
 ═══════════════════════════════════════════ */
-#toast {
-  position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(16px);
-  background: var(--c); color: #000;
-  font-family: 'Space Mono', monospace; font-weight: 700;
-  font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
-  padding: 10px 28px; opacity: 0; transition: opacity 0.3s, transform 0.3s; pointer-events: none; z-index: 400;
-}
+#toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(16px); background: var(--c); color: #000; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; padding: 10px 28px; opacity: 0; transition: opacity 0.3s, transform 0.3s; pointer-events: none; z-index: 400; }
 #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 footer { padding: 36px 48px; border-top: 1px solid var(--bdr); display: flex; align-items: center; justify-content: space-between; }
@@ -779,346 +327,46 @@ footer { padding: 36px 48px; border-top: 1px solid var(--bdr); display: flex; al
 .f-copy { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); }
 
 /* ═══════════════════════════════════════════
-   MOBILE RESPONSIVE
+   MOBILE
 ═══════════════════════════════════════════ */
 @media (max-width: 768px) {
-  /* Enable default cursor on mobile */
   body { cursor: default; }
   #cur, #cur-r { display: none; }
-  
-  /* Navigation */
   nav { padding: 14px 20px; }
   .nav-logo { font-size: 1.4rem; }
   .nav-links, #nav-status-wrap { display: none; }
-  
-  /* Sections */
   .sec { padding: 60px 20px; }
-  .sec-title { 
-    font-size: clamp(2.2rem, 12vw, 3.5rem);
-    margin-bottom: 36px;
-  }
-  .sec-label { font-size: 0.55rem; }
-  
-  /* Hero */
-  .hero { 
-    min-height: 100vh; 
-    padding: 80px 20px 40px;
-    justify-content: center;
-  }
-  
-  .glitch { 
-    font-size: clamp(60px, 20vw, 120px);
-    line-height: 0.9;
-  }
-  
-  .hero-tagline { 
-    font-size: 0.55rem;
-    letter-spacing: 0.25em;
-    margin-top: 16px;
-    text-align: center;
-  }
-  
-  .hero-time { 
-    font-size: 0.52rem;
-    margin-bottom: 16px;
-  }
-  
-  .status-pill { 
-    padding: 10px 20px;
-    font-size: 0.55rem;
-    letter-spacing: 0.2em;
-    margin-top: 28px;
-  }
-  
-  .hero-scroll { 
-    bottom: 24px;
-  }
-  
-  /* Grids - All Single Column */
-  .about-grid, 
-  .tos-grid, 
-  .contact-grid { 
-    grid-template-columns: 1fr; 
-  }
-  
-  /* About Stats */
-  .about-stat, 
-  .about-bio { 
-    padding: 32px 24px;
-  }
-  
-  .about-stat-n { 
-    font-size: 4rem;
-  }
-  
-  .about-stat-l { 
-    font-size: 0.55rem;
-  }
-  
-  .about-bio p { 
-    font-size: 0.92rem;
-    line-height: 1.7;
-  }
-  
-  .about-time { 
-    padding: 16px 20px;
-    gap: 12px;
-  }
-  
-  .about-time-lbl { 
-    font-size: 0.52rem;
-  }
-  
-  .about-time-val { 
-    font-size: 0.95rem;
-  }
-  
-  /* Portfolio */
-  .ptabs { 
-    flex-wrap: wrap;
-    gap: 0;
-  }
-  
-  .ptab { 
-    padding: 12px 20px;
-    font-size: 0.55rem;
-    letter-spacing: 0.2em;
-    flex: 1;
-    min-width: 120px;
-  }
-  
-  .pgrid { 
-    grid-template-columns: 1fr;
-  }
-  
-  .pi { 
-    aspect-ratio: 16/11;
-  }
-  
-  .pi-ov { 
-    opacity: 1;
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%);
-  }
-  
-  .pi-title { 
-    font-size: 0.9rem;
-  }
-  
-  .pi-desc { 
-    font-size: 0.68rem;
-  }
-  
-  /* Experience */
-  .exp-row { 
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 24px 20px;
-  }
-  
-  .exp-group { 
-    font-size: 0.95rem;
-  }
-  
-  .exp-role { 
-    font-size: 0.55rem;
-  }
-  
-  .exp-badge { 
-    font-size: 0.55rem;
-    padding: 6px 12px;
-    align-self: flex-start;
-  }
-  
-  /* TOS */
-  .tos-card { 
-    padding: 32px 24px;
-  }
-  
-  .tos-icon { 
-    font-size: 2rem;
-    margin-bottom: 16px;
-  }
-  
-  .tos-title { 
-    font-size: 0.92rem;
-  }
-  
-  .tos-desc { 
-    font-size: 0.8rem;
-    line-height: 1.6;
-  }
-  
-  /* Queue */
-  .queue-box { 
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 28px 20px;
-  }
-  
-  .queue-label { 
-    font-size: 0.52rem;
-  }
-  
-  .queue-info { 
-    font-size: 0.92rem;
-  }
-  
-  .queue-sub { 
-    font-size: 0.75rem;
-  }
-  
-  .queue-slots { 
-    justify-content: flex-start;
-  }
-  
-  .q-slot { 
-    width: 100%;
-    max-width: 80px;
-    height: 4px;
-  }
-  
-  /* Contact */
-  .c-link { 
-    padding: 24px 20px;
-    gap: 16px;
-  }
-  
-  .c-icon { 
-    width: 48px;
-    height: 48px;
-    font-size: 1.4rem;
-  }
-  
-  .c-name { 
-    font-size: 0.92rem;
-  }
-  
-  .c-detail { 
-    font-size: 0.55rem;
-  }
-  
-  .c-arr { 
-    font-size: 1.2rem;
-  }
-  
-  /* Footer */
-  footer { 
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
-    padding: 28px 20px;
-  }
-  
-  .f-logo { 
-    font-size: 1.6rem;
-  }
-  
-  .f-copy { 
-    font-size: 0.52rem;
-  }
-  
-  /* Music Player */
-  #mp { 
-    bottom: 16px;
-    left: 16px;
-    padding: 12px 16px;
-    gap: 10px;
-  }
-  
-  .mp-info, 
-  .mp-vol { 
-    display: none;
-  }
-  
-  .mp-bars { 
-    height: 14px;
-  }
-  
-  /* Toast */
-  #toast { 
-    font-size: 0.55rem;
-    padding: 10px 20px;
-    bottom: 80px;
-  }
-  
-  /* Enter Screen */
-  .enter-text { 
-    font-size: 0.62rem;
-    letter-spacing: 0.4em;
-  }
-  
-  /* Loader */
-  .ld-name { 
-    font-size: 3.5rem;
-  }
-  
-  .ld-bar-wrap { 
-    width: 180px;
-  }
-  
-  .ld-txt { 
-    font-size: 0.52rem;
-  }
+  .sec-title { font-size: clamp(2.2rem, 12vw, 3.5rem); margin-bottom: 36px; }
+  .hero { min-height: 100vh; padding: 80px 20px 40px; }
+  .glitch { font-size: clamp(60px, 20vw, 120px); }
+  .hero-tagline { font-size: 0.55rem; letter-spacing: 0.25em; margin-top: 16px; }
+  .hero-time { font-size: 0.52rem; margin-bottom: 16px; }
+  .status-pill { padding: 10px 20px; font-size: 0.55rem; margin-top: 28px; }
+  .hero-scroll { bottom: 24px; }
+  .about-grid, .tos-grid, .contact-grid { grid-template-columns: 1fr; }
+  .about-stat, .about-bio { padding: 32px 24px; }
+  .about-stat-n { font-size: 4rem; }
+  .ptabs { flex-wrap: wrap; }
+  .ptab { padding: 12px 20px; font-size: 0.55rem; flex: 1; min-width: 120px; }
+  .pgrid { grid-template-columns: 1fr; }
+  .pi { aspect-ratio: 16/11; }
+  .pi-ov { opacity: 1; }
+  .exp-row { grid-template-columns: 1fr; gap: 16px; padding: 24px 20px; }
+  .tos-card { padding: 32px 24px; }
+  .queue-box { grid-template-columns: 1fr; gap: 24px; padding: 28px 20px; }
+  .c-link { padding: 24px 20px; gap: 16px; }
+  .c-icon { width: 48px; height: 48px; font-size: 1.4rem; }
+  footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 20px; }
+  #mp { bottom: 16px; left: 16px; padding: 12px 16px; gap: 10px; }
+  .mp-info, .mp-vol { display: none; }
+  .reviews-top { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .review-card { padding: 24px; }
 }
-
-/* Extra Small Devices */
 @media (max-width: 480px) {
-  .glitch { 
-    font-size: clamp(50px, 18vw, 90px);
-  }
-  
-  .hero-tagline { 
-    font-size: 0.5rem;
-    letter-spacing: 0.2em;
-  }
-  
-  .sec-title { 
-    font-size: clamp(2rem, 11vw, 3rem);
-  }
-  
-  .about-stat-n { 
-    font-size: 3.5rem;
-  }
-  
-  .ptab { 
-    padding: 10px 14px;
-    font-size: 0.5rem;
-    min-width: 100px;
-  }
-  
-  .pi { 
-    aspect-ratio: 16/12;
-  }
-  
-  .ld-name { 
-    font-size: 3rem;
-  }
-  
-  .ld-bar-wrap { 
-    width: 150px;
-  }
+  .glitch { font-size: clamp(50px, 18vw, 90px); }
+  .sec-title { font-size: clamp(2rem, 11vw, 3rem); }
+  .about-stat-n { font-size: 3.5rem; }
 }
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-  import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, orderBy, query, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
- 
-  // ═══ REPLACE WITH YOUR FIREBASE CONFIG ═══
-  const firebaseConfig = {
-    apiKey: "AIzaSyDMKcvkIPuqYrY0VNYWlk7hTbWsM9oI0Qk",
-    authDomain: "fiyy13-portfolio.firebaseapp.com",
-    projectId: "fiyy13-portfolio",
-    storageBucket: "fiyy13-portfolio.appspot.com",
-    messagingSenderId: "1090998456947",
-    appId: "1:1090998456947:web:07dd09967558268dca1006"
-  };
- 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  window.db = db; // Make it globally available
- 
-  // Load reviews on page load
-  window.addEventListener('load', loadReviews);
-</script>
 </style>
 </head>
 <body>
@@ -1148,11 +396,8 @@ footer { padding: 36px 48px; border-top: 1px solid var(--bdr); display: flex; al
 
 <div id="mp" onclick="toggleMusic()">
   <div class="mp-bars paused" id="mp-bars">
-    <div class="mp-bar"></div>
-    <div class="mp-bar"></div>
-    <div class="mp-bar"></div>
-    <div class="mp-bar"></div>
-    <div class="mp-bar"></div>
+    <div class="mp-bar"></div><div class="mp-bar"></div><div class="mp-bar"></div>
+    <div class="mp-bar"></div><div class="mp-bar"></div>
   </div>
   <div class="mp-info"><b id="mp-title">Click to play music</b></div>
   <div class="mp-vol" onclick="event.stopPropagation()">
@@ -1170,6 +415,7 @@ footer { padding: 36px 48px; border-top: 1px solid var(--bdr); display: flex; al
       <li><a href="#portfolio">Work</a></li>
       <li><a href="#experience">History</a></li>
       <li><a href="#tos">Terms</a></li>
+      <li><a href="#reviews">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div id="nav-status-wrap"></div>
@@ -1195,18 +441,9 @@ footer { padding: 36px 48px; border-top: 1px solid var(--bdr); display: flex; al
     <div class="sec-label rv">001 — About</div>
     <div class="sec-title rv">Who<br>I Am.</div>
     <div class="about-grid rv">
-      <div class="about-stat">
-        <div class="about-stat-n">400K+</div>
-        <div class="about-stat-l">Players Reached</div>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-n">5+</div>
-        <div class="about-stat-l">Groups Served</div>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-n">3+</div>
-        <div class="about-stat-l">Years Active</div>
-      </div>
+      <div class="about-stat"><div class="about-stat-n">400K+</div><div class="about-stat-l">Players Reached</div></div>
+      <div class="about-stat"><div class="about-stat-n">5+</div><div class="about-stat-l">Groups Served</div></div>
+      <div class="about-stat"><div class="about-stat-n">3+</div><div class="about-stat-l">Years Active</div></div>
       <div class="about-bio">
         <p>I'm <strong>Fiyy</strong> — a developer specializing in <strong>Roblox systems</strong> and <strong>web solutions</strong>. Based in Malaysia, I focus on performance and clean design.</p>
         <div class="about-time">
@@ -1260,6 +497,36 @@ footer { padding: 36px 48px; border-top: 1px solid var(--bdr); display: flex; al
 
   <div class="hr"></div>
 
+  <!-- ═══ REVIEWS (display only) ═══ -->
+  <section class="sec" id="reviews">
+    <div class="sec-label rv">004.5 — Client Feedback</div>
+    <div class="sec-title rv">Reviews.</div>
+
+    <div class="reviews-top rv">
+      <div class="reviews-count-badge" id="reviews-count">Loading...</div>
+      <a href="reviews-a7x3q.html" class="leave-review-btn">
+        Leave a Review <span class="arr">↗</span>
+      </a>
+    </div>
+
+    <div class="reviews-container rv" id="reviews-container">
+      <div class="no-reviews" id="no-reviews">Loading reviews...</div>
+      <div id="reviews-grid" class="reviews-grid" style="display:none;"></div>
+      <div style="overflow:hidden;">
+        <div id="reviews-slider" class="reviews-slider" style="display:none;"></div>
+      </div>
+      <div class="slider-nav" id="slider-nav" style="display:none;">
+        <div class="slider-dots" id="slider-dots"></div>
+        <div class="slider-arrows">
+          <button class="slider-arrow" onclick="prevSlide()">←</button>
+          <button class="slider-arrow" onclick="nextSlide()">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hr"></div>
+
   <section class="sec" id="contact">
     <div class="sec-label rv">005 — Contact</div>
     <div class="sec-title rv">Get In<br>Touch.</div>
@@ -1272,14 +539,29 @@ footer { padding: 36px 48px; border-top: 1px solid var(--bdr); display: flex; al
   </footer>
 </div>
 
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+  import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+  const app = initializeApp({
+    apiKey: "AIzaSyDMKcvkIPuqYrY0VNYWlk7hTbWsM9oI0Qk",
+    authDomain: "fiyy13-portfolio.firebaseapp.com",
+    projectId: "fiyy13-portfolio",
+    storageBucket: "fiyy13-portfolio.appspot.com",
+    messagingSenderId: "1090998456947",
+    appId: "1:1090998456947:web:07dd09967558268dca1006"
+  });
+  window.db = getFirestore(app);
+  window.addEventListener('load', loadReviews);
+</script>
+
 <script>
-// FULL ORIGINAL CONFIG RESTORED
 const CONFIG = {
   name: "FIYY",
   tagline: `<span class="ac">Roblox Dev</span> &mdash; Web Builder &mdash; <span class="ac">Commission Open</span>`,
   isAvailable: false,
-  bgVideo: "bg.mp4", 
-  music: [{ file: "music.mp3", title: "Lost Soul — NBSPLV" }], 
+  bgVideo: "bg.mp4",
+  music: [{ file: "music.mp3", title: "Lost Soul — NBSPLV" }],
   portfolio: {
     building: [
       { title: "MCOnet Project", description: "A map based on Monaco", image: "portfolio/building/monaco.webp" },
@@ -1300,7 +582,6 @@ const CONFIG = {
       { title: "Report System", description: "Mod call / Bug report", image: "portfolio/scripting/report.webp" },
       { title: "Football Scoreboard", description: "LIGA SUPER animated", image: "portfolio/scripting/football.webp" },
       { title: "Parliament Voting", description: "Advanced parliament voting system", image: "portfolio/scripting/par.png" },
-      // { title: "Modification System", description: "Advanced backend scripts (GUI not made by me)", image: "portfolio/scripting/modif.gif" },
     ],
     website: [
       { title: "Ministry of Finance", description: "Tax & Economy dashboard", image: "portfolio/website/mfa.gif" },
@@ -1341,21 +622,11 @@ let trackIdx = 0;
 const audio = document.getElementById('bg-audio');
 const volEl = document.getElementById('mp-vol');
 
-// ONLY SETUP UI ON LOAD - DO NOT START LOADERS YET
 document.addEventListener('DOMContentLoaded', () => {
-  initCursor();
-  initClock();
-  initStatus();
-  initHero();
-  buildPortfolio('building');
-  buildExperience();
-  buildTOS();
-  buildQueue();
-  buildContact();
+  initCursor(); initClock(); initStatus(); initHero();
+  buildPortfolio('building'); buildExperience(); buildTOS(); buildQueue(); buildContact();
   initReveal();
   document.getElementById('f-year').textContent = `© ${new Date().getFullYear()} — All Rights Reserved`;
-  
-  // Setup music handlers (but don't play yet)
   volEl.addEventListener('input', () => audio.volume = volEl.value);
   audio.addEventListener('ended', () => {
     trackIdx = (trackIdx + 1) % CONFIG.music.length;
@@ -1364,80 +635,42 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// THIS RUNS WHEN "CLICK TO ENTER" IS CLICKED
 function startSite() {
-  // 1. Hide the enter screen and start the loader
   document.getElementById('enter-screen').classList.add('gone');
   setTimeout(() => document.getElementById('loader').classList.add('gone'), 1600);
-
-  // 2. Handle Video
   const v = document.getElementById('bg-vid');
-  v.src = CONFIG.bgVideo;
-  v.play().catch(e => console.warn("Video failed:", e));
-
-  // 3. Handle Music
+  v.src = CONFIG.bgVideo; v.play().catch(() => {});
   if (CONFIG.music.length > 0) {
-    // Explicitly set the source before playing
-    audio.src = CONFIG.music[0].file;
-    audio.load(); // Forces the browser to buffer the file
-    
+    audio.src = CONFIG.music[0].file; audio.load();
     audio.play().then(() => {
       isPlaying = true;
       document.getElementById('mp-bars').classList.remove('paused');
       document.getElementById('mp-title').textContent = CONFIG.music[0].title;
-    }).catch(e => {
-      console.error("Audio block:", e);
-      document.getElementById('mp-title').textContent = "Click to play";
-    });
+    }).catch(() => { document.getElementById('mp-title').textContent = "Click to play"; });
   }
 }
 
 function toggleMusic() {
-  const bars = document.getElementById('mp-bars');
-  const title = document.getElementById('mp-title');
-
-  if (!audio.src || audio.src.includes(window.location.hostname) && !audio.src.endsWith('.mp3')) {
-     audio.src = CONFIG.music[trackIdx].file;
-  }
-
-  if (isPlaying) {
-    audio.pause();
-    bars.classList.add('paused');
-    isPlaying = false;
-  } else {
-    audio.play().then(() => {
-      bars.classList.remove('paused');
-      isPlaying = true;
-      title.textContent = CONFIG.music[trackIdx].title;
-    }).catch(() => {
-      copyToast("Music file missing", "Check path");
-    });
-  }
+  const bars = document.getElementById('mp-bars'), title = document.getElementById('mp-title');
+  if (!audio.src || !audio.src.endsWith('.mp3')) audio.src = CONFIG.music[trackIdx].file;
+  if (isPlaying) { audio.pause(); bars.classList.add('paused'); isPlaying = false; }
+  else { audio.play().then(() => { bars.classList.remove('paused'); isPlaying = true; title.textContent = CONFIG.music[trackIdx].title; }).catch(() => {}); }
 }
 
 function initCursor() {
   const dot = document.getElementById('cur'), ring = document.getElementById('cur-r');
   let rx = 0, ry = 0, mx = 0, my = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = (mx - 3.5) + 'px'; dot.style.top = (my - 3.5) + 'px';
-  });
-  (function animRing() {
-    rx += (mx - rx - 15) * 0.14; ry += (my - ry - 15) * 0.14;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(animRing);
-  })();
-  document.addEventListener('mouseover', e => {
-    if (e.target.closest('a, button, .pi, .c-link, .ptab')) document.body.classList.add('hovering');
-    else document.body.classList.remove('hovering');
-  });
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = (mx-3.5)+'px'; dot.style.top = (my-3.5)+'px'; });
+  (function animRing() { rx += (mx-rx-15)*0.14; ry += (my-ry-15)*0.14; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animRing); })();
+  document.addEventListener('mouseover', e => { document.body.classList.toggle('hovering', !!e.target.closest('a, button, .pi, .c-link, .ptab, .slider-arrow')); });
 }
 
 function initClock() {
   function tick() {
     const t = new Date().toLocaleTimeString('en-US', { timeZone:'Asia/Kuala_Lumpur', hour12:true, hour:'numeric', minute:'2-digit' });
-    if (document.getElementById('hero-time')) document.getElementById('hero-time').innerHTML = `● KL, MY — <span class="ac">${t}</span>`;
-    if (document.getElementById('about-time-val')) document.getElementById('about-time-val').textContent = `${t} (GMT+8)`;
+    const ht = document.getElementById('hero-time'), at = document.getElementById('about-time-val');
+    if (ht) ht.innerHTML = `● KL, MY — <span class="ac">${t}</span>`;
+    if (at) at.textContent = `${t} (GMT+8)`;
   }
   tick(); setInterval(tick, 1000);
 }
@@ -1447,9 +680,9 @@ function toggleStatus() { isAvailable = !isAvailable; renderStatus(); }
 function renderStatus() {
   const pill = document.getElementById('status-pill'), txt = document.getElementById('status-txt');
   if (!pill) return;
-  pill.className = `status-pill ${isAvailable ? 'av' : 'bz'} rv in`;
+  pill.className = `status-pill ${isAvailable?'av':'bz'} rv in`;
   txt.textContent = isAvailable ? 'Open for Commissions' : 'Currently Busy';
-  document.getElementById('nav-status-wrap').innerHTML = `<div class="status-pill ${isAvailable?'av':'bz'}" style="margin:0;padding:6px 16px;font-size:0.58rem" onclick="toggleStatus()"><span class="sdot"></span><span>${isAvailable ? 'Available' : 'Busy'}</span></div>`;
+  document.getElementById('nav-status-wrap').innerHTML = `<div class="status-pill ${isAvailable?'av':'bz'}" style="margin:0;padding:6px 16px;font-size:0.58rem" onclick="toggleStatus()"><span class="sdot"></span><span>${isAvailable?'Available':'Busy'}</span></div>`;
 }
 
 function initHero() {
@@ -1465,16 +698,12 @@ function switchTab(btn, tab) {
 
 function buildPortfolio(tab) {
   const items = CONFIG.portfolio[tab] || [], grid = document.getElementById('pgrid');
-  grid.innerHTML = items.map(item => `
-    <div class="pi rv">
-      <img src="${item.image}" alt="${item.title}" loading="lazy" onerror="this.parentElement.style.background='#141414';this.style.display='none'">
-      <div class="pi-ov"><div><div class="pi-title">${item.title}</div><div class="pi-desc">${item.description}</div></div></div>
-    </div>`).join('');
+  grid.innerHTML = items.map(item => `<div class="pi rv"><img src="${item.image}" alt="${item.title}" loading="lazy" onerror="this.parentElement.style.background='#141414';this.style.display='none'"><div class="pi-ov"><div><div class="pi-title">${item.title}</div><div class="pi-desc">${item.description}</div></div></div></div>`).join('');
   setTimeout(initReveal, 50);
 }
 
 function buildExperience() {
-  document.getElementById('exp-list').innerHTML = CONFIG.experience.map((e, i) => `<div class="exp-row rv" style="transition-delay:${i * 0.07}s"><div><div class="exp-group">${e.group}</div><div class="exp-role">${e.role}</div></div><div class="exp-badge">${e.members}</div></div>`).join('');
+  document.getElementById('exp-list').innerHTML = CONFIG.experience.map((e, i) => `<div class="exp-row rv" style="transition-delay:${i*0.07}s"><div><div class="exp-group">${e.group}</div><div class="exp-role">${e.role}</div></div><div class="exp-badge">${e.members}</div></div>`).join('');
 }
 
 function buildTOS() {
@@ -1485,11 +714,11 @@ function buildQueue() {
   const { queueFilled, queueTotal } = CONFIG;
   document.getElementById('queue-info').textContent = `${queueFilled} / ${queueTotal} Slots Occupied`;
   document.getElementById('queue-sub').textContent = queueFilled < queueTotal ? 'Taking new commissions!' : 'All slots full.';
-  document.getElementById('queue-slots').innerHTML = Array(queueTotal).fill().map((_,i) => `<div class="q-slot ${i < queueFilled ? 'on' : ''}"></div>`).join('');
+  document.getElementById('queue-slots').innerHTML = Array(queueTotal).fill().map((_,i) => `<div class="q-slot ${i<queueFilled?'on':''}"></div>`).join('');
 }
 
 function buildContact() {
-  document.getElementById('contact-grid').innerHTML = CONFIG.contact.map((c, i) => `<div class="c-link rv" style="transition-delay:${i*0.08}s;background:${c.bg || 'var(--bg)'}" onclick="${c.action === 'copy' ? `copyToast('${c.url}', '${c.name} Copied!')` : `window.open('${c.url}','_blank')`}"><div class="c-icon">${c.icon}</div><div><div class="c-name">${c.name}</div><div class="c-detail">${c.detail}</div></div><div class="c-arr">↗</div></div>`).join('');
+  document.getElementById('contact-grid').innerHTML = CONFIG.contact.map((c, i) => `<div class="c-link rv" style="transition-delay:${i*0.08}s;background:${c.bg||'var(--bg)'}" onclick="${c.action==='copy'?`copyToast('${c.url}','${c.name} Copied!')`:`window.open('${c.url}','_blank')`}"><div class="c-icon">${c.icon}</div><div><div class="c-name">${c.name}</div><div class="c-detail">${c.detail}</div></div><div class="c-arr">↗</div></div>`).join('');
 }
 
 function initReveal() {
@@ -1498,237 +727,110 @@ function initReveal() {
 }
 
 function copyToast(text, msg) {
-  navigator.clipboard.writeText(text).catch(() => {});
+  if (text) navigator.clipboard.writeText(text).catch(() => {});
   const t = document.getElementById('toast');
-  t.textContent = msg || 'Copied!'; t.classList.add('show');
+  t.textContent = msg||'Copied!'; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2200);
 }
-</script>
-   <script>
-// ═══════════════════════════════════════════
-//   FEEDBACK SYSTEM
-// ═══════════════════════════════════════════
- 
-let selectedRating = 0;
-let currentSlide = 0;
-let slideInterval = null;
-let reviews = [];
- 
-// Star rating selection
-document.querySelectorAll('.star-btn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    selectedRating = parseInt(btn.dataset.rating);
-    document.getElementById('rating-value').value = selectedRating;
-    
-    document.querySelectorAll('.star-btn').forEach((star, idx) => {
-      if (idx < selectedRating) {
-        star.classList.add('active');
-      } else {
-        star.classList.remove('active');
-      }
-    });
-  });
-});
- 
-// Form submission
-document.getElementById('feedback-form').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  
-  if (selectedRating === 0) {
-    copyToast('', 'Please select a rating!');
-    return;
-  }
- 
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.textContent = 'Submitting...';
- 
-  try {
-    const { addDoc, collection, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
-    
-    await addDoc(collection(window.db, 'reviews'), {
-      name: document.getElementById('name-input').value.trim(),
-      rating: selectedRating,
-      feedback: document.getElementById('feedback-input').value.trim(),
-      timestamp: serverTimestamp()
-    });
- 
-    copyToast('', 'Review submitted! Thanks! 🔥');
-    
-    // Reset form
-    document.getElementById('feedback-form').reset();
-    selectedRating = 0;
-    document.querySelectorAll('.star-btn').forEach(s => s.classList.remove('active'));
-    
-    // Reload reviews
-    setTimeout(loadReviews, 1000);
-    
-  } catch (error) {
-    console.error('Error:', error);
-    copyToast('', 'Failed to submit. Try again!');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Submit Review';
-  }
-});
- 
-// Load reviews from Firebase
+
+// ── REVIEWS ──
+let reviews = [], currentSlide = 0, slideInterval = null;
+
 async function loadReviews() {
   try {
     const { getDocs, collection, query, orderBy } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
-    
     const q = query(collection(window.db, 'reviews'), orderBy('timestamp', 'desc'));
-    const snapshot = await getDocs(q);
-    
-    reviews = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
- 
-    displayReviews();
-  } catch (error) {
-    console.error('Error loading reviews:', error);
-    document.getElementById('no-reviews').textContent = 'Failed to load reviews';
+    const snap = await getDocs(q);
+    reviews = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderReviews();
+  } catch (err) {
+    document.getElementById('no-reviews').textContent = 'Could not load reviews.';
+    document.getElementById('reviews-count').textContent = '';
   }
 }
- 
-// Display reviews
-function displayReviews() {
-  const container = document.getElementById('reviews-container');
-  const noReviews = document.getElementById('no-reviews');
-  const grid = document.getElementById('reviews-grid');
-  const slider = document.getElementById('reviews-slider');
-  const dots = document.getElementById('slider-dots');
- 
+
+function renderReviews() {
+  const noEl = document.getElementById('no-reviews');
+  const gridEl = document.getElementById('reviews-grid');
+  const sliderEl = document.getElementById('reviews-slider');
+  const navEl = document.getElementById('slider-nav');
+  const countEl = document.getElementById('reviews-count');
+
+  countEl.textContent = `${reviews.length} review${reviews.length !== 1 ? 's' : ''}`;
+
   if (reviews.length === 0) {
-    noReviews.textContent = 'No reviews yet. Be the first!';
-    noReviews.style.display = 'block';
-    grid.style.display = 'none';
-    slider.style.display = 'none';
-    dots.style.display = 'none';
+    noEl.textContent = 'No reviews yet.';
+    noEl.style.display = 'block';
+    gridEl.style.display = 'none';
+    sliderEl.style.display = 'none';
+    navEl.style.display = 'none';
     return;
   }
- 
-  noReviews.style.display = 'none';
- 
-  // Static display for 1-3 reviews
+
+  noEl.style.display = 'none';
+
   if (reviews.length <= 3) {
-    grid.style.display = 'grid';
-    slider.style.display = 'none';
-    dots.style.display = 'none';
-    grid.innerHTML = reviews.map(r => createReviewCard(r)).join('');
-  } 
-  // Sliding display for 4+ reviews
-  else {
-    grid.style.display = 'none';
-    slider.style.display = 'flex';
-    dots.style.display = 'flex';
-    
-    slider.innerHTML = reviews.map(r => createReviewCard(r)).join('');
-    dots.innerHTML = reviews.map((_, i) => 
-      `<div class="slider-dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>`
+    gridEl.style.display = 'grid';
+    sliderEl.style.display = 'none';
+    navEl.style.display = 'none';
+    gridEl.innerHTML = reviews.map(r => cardHtml(r)).join('');
+  } else {
+    gridEl.style.display = 'none';
+    sliderEl.style.display = 'flex';
+    navEl.style.display = 'flex';
+    sliderEl.innerHTML = reviews.map(r => cardHtml(r, true)).join('');
+    document.getElementById('slider-dots').innerHTML = reviews.map((_, i) =>
+      `<div class="slider-dot ${i===0?'active':''}" onclick="goToSlide(${i})"></div>`
     ).join('');
-    
+    currentSlide = 0;
     startSlider();
   }
 }
- 
-// Create review card HTML
-function createReviewCard(review) {
-  const date = review.timestamp ? new Date(review.timestamp.seconds * 1000).toLocaleDateString('en-GB', { 
-    day: '2-digit', 
-    month: 'short', 
-    year: 'numeric' 
-  }) : 'Just now';
-  
-  const stars = '⭐'.repeat(review.rating);
-  
-  // Check if admin mode is active (simple check)
-  const isAdmin = localStorage.getItem('adminMode') === 'true';
-  const deleteBtn = isAdmin ? 
-    `<button class="delete-btn" onclick="deleteReview('${review.id}')">Delete</button>` : '';
- 
-  return `
-    <div class="review-card">
-      ${deleteBtn}
-      <div class="review-header">
-        <div class="review-name">${escapeHtml(review.name)}</div>
-        <div class="review-stars">${stars}</div>
-      </div>
-      <div class="review-text">${escapeHtml(review.feedback)}</div>
-      <div class="review-date">${date}</div>
-    </div>
-  `;
+
+function cardHtml(r, isSlider = false) {
+  const date = r.timestamp
+    ? new Date(r.timestamp.seconds * 1000).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
+    : 'Just now';
+  const stars = '⭐'.repeat(r.rating);
+  const isAdmin = localStorage.getItem('fiyy_admin') === 'true';
+  const del = isAdmin ? `<button class="delete-btn" onclick="deleteReview('${r.id}')">Delete</button>` : '';
+  const w = isSlider ? `min-width:min(400px, 100vw - 40px);` : '';
+  return `<div class="review-card" style="${w}">${del}
+    <div class="review-header"><div class="review-name">${esc(r.name)}</div><div class="review-stars">${stars}</div></div>
+    <div class="review-text">${esc(r.feedback)}</div>
+    <div class="review-date">${date}</div>
+  </div>`;
 }
- 
-// Slider functions
+
 function startSlider() {
   if (slideInterval) clearInterval(slideInterval);
   slideInterval = setInterval(nextSlide, 5000);
 }
- 
-function nextSlide() {
-  currentSlide = (currentSlide + 1) % reviews.length;
-  updateSlider();
-}
- 
-function goToSlide(index) {
-  currentSlide = index;
-  updateSlider();
-  startSlider();
-}
- 
+function nextSlide() { currentSlide = (currentSlide + 1) % reviews.length; updateSlider(); }
+function prevSlide() { currentSlide = (currentSlide - 1 + reviews.length) % reviews.length; updateSlider(); startSlider(); }
+function goToSlide(i) { currentSlide = i; updateSlider(); startSlider(); }
 function updateSlider() {
-  const slider = document.getElementById('reviews-slider');
-  slider.style.transform = `translateX(-${currentSlide * 400}px)`;
-  
-  document.querySelectorAll('.slider-dot').forEach((dot, i) => {
-    dot.classList.toggle('active', i === currentSlide);
-  });
+  const el = document.getElementById('reviews-slider');
+  const w = Math.min(400, window.innerWidth - 40);
+  el.style.transform = `translateX(-${currentSlide * w}px)`;
+  document.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
 }
- 
-// Delete review (admin only)
-async function deleteReview(reviewId) {
-  const password = prompt('Enter admin password:');
-  
-  // Simple password check (you can change this)
-  if (password !== 'fiyy2026') {
-    copyToast('', 'Wrong password!');
-    return;
-  }
- 
+
+async function deleteReview(id) {
+  const pw = prompt('Admin password:');
+  if (pw !== 'fiyy13_Admin') { copyToast('', 'Wrong password!'); return; }
   try {
     const { deleteDoc, doc } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
-    await deleteDoc(doc(window.db, 'reviews', reviewId));
-    
-    copyToast('', 'Troll eliminated! 🔥');
+    await deleteDoc(doc(window.db, 'reviews', id));
+    copyToast('', 'Deleted!');
     loadReviews();
-  } catch (error) {
-    console.error('Delete error:', error);
-    copyToast('', 'Failed to delete');
-  }
+  } catch { copyToast('', 'Failed to delete'); }
 }
- 
-// Enable admin mode (type in console: enableAdmin())
-window.enableAdmin = () => {
-  localStorage.setItem('adminMode', 'true');
-  copyToast('', 'Admin mode enabled!');
-  loadReviews();
-};
- 
-window.disableAdmin = () => {
-  localStorage.removeItem('adminMode');
-  copyToast('', 'Admin mode disabled!');
-  loadReviews();
-};
- 
-// Utility function
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
+
+window.enableAdmin = () => { localStorage.setItem('fiyy_admin','true'); copyToast('','Admin on'); loadReviews(); };
+window.disableAdmin = () => { localStorage.removeItem('fiyy_admin'); copyToast('','Admin off'); loadReviews(); };
+
+function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
 </script>
 </body>
 </html>
