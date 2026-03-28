@@ -358,6 +358,14 @@ document.getElementById('feedback-form').addEventListener('submit', async (e) =>
   e.preventDefault();
   if (selectedRating === 0) { showToast('Please select a rating!'); return; }
 
+  const nameVal = document.getElementById('name-input').value.trim();
+  const feedbackVal = document.getElementById('feedback-input').value.trim();
+  
+  if (!nameVal || !feedbackVal) {
+    showToast('Please fill all fields!');
+    return;
+  }
+
   const btn = document.getElementById('submit-btn');
   btn.disabled = true;
   btn.textContent = 'Submitting...';
@@ -365,9 +373,9 @@ document.getElementById('feedback-form').addEventListener('submit', async (e) =>
   try {
     const { addDoc, collection, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
     await addDoc(collection(window.db, 'reviews'), {
-      name: document.getElementById('name-input').value.trim(),
+      name: nameVal,
       rating: selectedRating,
-      feedback: document.getElementById('feedback-input').value.trim(),
+      feedback: feedbackVal,
       timestamp: serverTimestamp()
     });
     document.getElementById('form-section').style.display = 'none';
