@@ -733,8 +733,9 @@ function renderReviews() {
   const sliderEl = document.getElementById('reviews-slider');
   const navEl = document.getElementById('slider-nav');
   const countEl = document.getElementById('reviews-count');
-
-  countEl.textContent = `${reviews.length} review${reviews.length !== 1 ? 's' : ''}`;
+   if (countEl) {
+     countEl.textContent = `${reviews.length} review${reviews.length !== 1 ? 's' : ''}`;
+}
 
   if (reviews.length === 0) {
     noEl.textContent = 'No reviews yet.';
