@@ -799,7 +799,41 @@ const isAdmin = getAuth().currentUser != null;
     <div class="review-date">${date}</div>
   </div>`;
 }
+function startSite() {
+    // 1. Hide the enter screen
+    const enterScreen = document.getElementById('enter-screen');
+    enterScreen.classList.add('gone');
 
+    // 2. Start the background video
+    const video = document.getElementById('bg-vid');
+    video.src = CONFIG.bgVideo;
+    video.play();
+
+    // 3. Handle the loader (optional delay for effect)
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      loader.classList.add('gone');
+      
+      // 4. Trigger the reveal animations for the hero section
+      const reveals = document.querySelectorAll('.rv');
+      reveals.forEach(el => el.classList.add('in'));
+    }, 2000); // 2 seconds to show off your cool loader
+  }
+
+  // Add the cursor tracking logic so it actually moves
+  const cur = document.getElementById('cur');
+  const curR = document.getElementById('cur-r');
+
+  window.addEventListener('mousemove', (e) => {
+    cur.style.left = e.clientX + 'px';
+    cur.style.top = e.clientY + 'px';
+    
+    // Smooth trailing effect for the outer circle
+    curR.animate({
+      left: e.clientX - 15 + 'px',
+      top: e.clientY - 15 + 'px'
+    }, { duration: 500, fill: "forwards" });
+  });
 function startSlider() {
   if (slideInterval) clearInterval(slideInterval);
   slideInterval = setInterval(nextSlide, 5000);
